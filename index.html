@@ -2,15 +2,19 @@
 <html>
 <head>
   <title>STREAM</title>
+  <style type="text/css">
+    .color-red { color: red; }
+    .color-blue { color: blue; }
+    .is-loading { background: red; }
+    .is-disabled { background: yellow; }
+  </style>
 </head>
 <body>
   <div id="root">
-    <ul>
-      <li v-for="name in names" v-text="name"></li>
-    </ul>
-
-    <input id="input" type="text" v-model="newName">
-    <button @click="addName">Add Name</button>
+    <h1 :class="className">Welcome!</h1>
+    <button :class="{ 'is-loading' : isLoading }" @click="toggleClass">Toggle Me</button>
+    <button :title="title">Hover Over Me</button>
+    <button :disabled="isDisabled">Do I Work?</button>
   </div>
 
   <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
@@ -19,15 +23,14 @@
     const app = new Vue({
       el: '#root',
       data: {
-        newName: '',
-        names: ['Adam', 'Jenn', 'Carl', 'Rosanne'],
+        title: 'Now the title is being set through JavaScript.',
+        className: 'color-red',
+        isLoading: false,
+        isDisabled: true,
       },
-
       methods: {
-        addName() {
-          this.names.push(this.newName)
-
-          this.newName = ''
+        toggleClass() {
+          this.isLoading = true
         },
       },
     })

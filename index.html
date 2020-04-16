@@ -8,13 +8,19 @@
 <body>
 
   <div id="root" class="container">
-    <modal v-if="showLoginModal" @close="showLoginModal = false">
-      <p>
-        Login details for our modal
-      </p>
-    </modal>
+    <tabs>
+      <tab name="About Us" :selected="true">
+        <h1>Here is the content for the about us tab.</h1>
+      </tab>
 
-    <button @click="showLoginModal = true">Show Modal</button>
+      <tab name="About Our Culture">
+        <h1>Here is the content for the about our culture tab.</h1>
+      </tab>
+
+      <tab name="About Our Vision">
+        <h1>Here is the content for the about our vision tab.</h1>
+      </tab>
+    </tabs>
   </div>
 
   <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>

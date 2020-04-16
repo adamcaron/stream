@@ -5,66 +5,16 @@
 </head>
 <body>
   <div id="root">
-    <h2>All Tasks</h2>
-
-    <ul>
-      <li v-for="task in tasks" v-text="task.description"></li>
-    </ul>
-
-    <h2>Incomplete Tasks</h2>
-
-    <ul>
-      <li v-for="task in incompleteTasks">
-        <button @click="markComplete(task.id)">Mark Complete</button>
-        {{ task.description }}
-      </li>
-    </ul>
-
-    <h2>Complete Tasks</h2>
-
-    <ul>
-      <li v-for="task in completeTasks" v-text="task.description"></li>
-    </ul>
-
+    <task>Go to the store</task>
+    <task-button>1</task-button>
+    <task>Go to the bank</task>
+    <task-button>2</task-button>
+    <task>Go to work</task>
+    <task-button>3</task-button>
   </div>
 
   <script src="https://unpkg.com/vue@2.1.3/dist/vue.js"></script>
 
-  <script>
-    const app = new Vue({
-      el: '#root',
-
-      data: {
-        tasks: [
-          { id: 1, description: 'Go to the store', completed: true },
-          { id: 2, description: 'Finish chores', completed: false },
-          { id: 3, description: 'Make donation', completed: false },
-          { id: 4, description: 'Clear inbox', completed: false },
-          { id: 5, description: 'Make dinner', completed: false },
-          { id: 6, description: 'Clean room', completed: true },
-        ]
-      },
-
-      computed: {
-        incompleteTasks() {
-          return this.tasks.filter(task => !task.completed)
-        },
-        completeTasks() {
-          return this.tasks.filter(task => task.completed)
-        },
-      },
-
-      methods: {
-        markComplete(id) {
-          this.tasks.map((task) => {
-            if (task.id === id) {
-              task.completed = true
-            }
-            return task
-          })
-        },
-      }
-    })
-  </script>
+  <script src="main.js"></script>
 </body>
 </html>

@@ -1,43 +1,30 @@
-window.Event = new class {
-  constructor() {
-    this.vue = new Vue()
-  }
-
-  fire(event, data = null) {
-    this.vue.$emit(event, data)
-  }
-
-  listen(event, callback) {
-    this.vue.$on(event, callback)
-  }
-}
-
-// Alternative:
-// window.Event = new Vue()
-
-Vue.component('coupon', {
+Vue.component('modal', {
   template: `
-    <input placeholder="Enter your coupon code" @blur="onCouponApplied">
-  `,
-  methods: {
-    onCouponApplied() {
-      Event.fire('applied')
+    <div class="modal is-active">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">
+            <slot name="header"></slot>
+          </p>
 
-      // Alternative:
-      // Event.$emit('applied')
-    },
-  }
+          <button class="delete" aria-label="close"></button>
+        </header>
+
+        <section class="modal-card-body">
+          <slot></slot>
+        </section>
+
+        <footer class="modal-card-foot">
+          <slot name="footer">
+            <a class="button is-primary">Okay</a>
+          </slot>
+        </footer>
+      </div>
+    </div>
+  `,
 })
 
 new Vue({
   el: '#root',
-  data: {
-    couponApplied: false,
-  },
-  created() {
-    Event.listen('applied', () => alert('Handling it!'))
-
-    // Alternative:
-    // Event.$on('applied', () => alert('Handling it!'))
-  },
 })
